@@ -7,7 +7,7 @@ GitHub Link:
 https://github.com/zink38/Comp2005Assign1
 
 Group Members: 
-Keegan Churchill-Myers, kcm507, Student Number 
-Dylan Cross, djc524, 201527728 
-Samantha Deakin-Sharpe, sdeakinsharp, 201645124
-Zack French, ztfrench, Student Number
+Keegan Churchill-Myers, kcm507, Student Number //
+Dylan Cross, djc524, 201527728 //
+Samantha Deakin-Sharpe, sdeakinsharp, 201645124 //
+Zack French, ztfrench, Student Number //
