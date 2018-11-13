@@ -2,6 +2,7 @@ package controller;
 
 import model.Database;
 //hello
+//hi
 public class Controller {
 	Database db = new Database();
 	
