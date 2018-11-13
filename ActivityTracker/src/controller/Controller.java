@@ -1,28 +1,27 @@
 package controller;
 
-import model.Database;
-//hello
-//hi
+import model.Model;
+
 public class Controller {
-	Database db = new Database();
+	Model model = new Model();
 	
 	public Controller() {
 		
 	}
 	public String login(){
-		return db.getAccount();
+		return model.getAccount();
 	}
 	public String save() {
-		return db.saveToFile();
+		return model.saveToFile();
 	}
 	public String importDevice() {
-		return db.loadFromFile();
+		return model.loadFromFile();
 	}
 	public String removeData() {
-		return db.removeData();
+		return model.removeData();
 	}
 	public String register() {
-		return db.addAccount();
+		return model.addAccount();
 	}
 	public String logout() {
 		return "Data Restricted\n";
@@ -31,9 +30,9 @@ public class Controller {
 		return "Prepared for editing\n";
 	}
 	public String updateDB() {
-		return db.addData();
+		return model.addData();
 	}
 	public String sort() {
-		return db.sortData();
+		return model.sortData();
 	}
 }
