@@ -3,8 +3,6 @@ Comp2005 Assignment 1
 This program is a psuedo prototype of a desktop 'Activity Tracker'.
 When given information on various physical activities.
 
-GitHub Link:
-https://github.com/zink38/Comp2005Assign1
 
 Group Members: 
 Keegan Churchill-Myers, kcm507, 201510260, 10 points //
