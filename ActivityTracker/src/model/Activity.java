@@ -1,5 +1,5 @@
 package model;
-//test1234...
+//test1234..
 public class Activity {
 	private double type;
 	private double time;
