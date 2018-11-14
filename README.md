@@ -1,19 +1,19 @@
-# Comp2005 Project
-Comp2005 
-Assignment 1
+## Comp2005 Project
+
+#Assignment 1
 This program is a psuedo prototype of a desktop 'Activity Tracker'.
 When given information on various physical activities.
 
-Assignment 2
-Prototype GUI 
-More documentatin and project planning.
+#Assignment 2
+*Prototype GUI 
+*More documentation and project planning.
 
-Assignment 3
-Executable project archeitecture.
-More documention and project planning.
+#Assignment 3
+*Executable project archeitecture.
+*More documention and project planning.
 
 
-Group Members: 
+#Group Members: 
 Keegan Churchill-Myers, kcm507, 201510260, 10 points //
 Dylan Cross, djc524, 201527728, 10 points //
 Samantha Deakin-Sharpe, sdeakinsharp, 201645124, 10 points //
