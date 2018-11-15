@@ -36,6 +36,7 @@ public class MainFrame extends JFrame {
 		setJMenuBar(createMenuBar());
 		
 		textPanel.setEnabled(false);
+		toolbar.setVisible(false);
 		
 		toolbar.setButtonListener(new ButtonListener() {
 			public void sortEmitted() {
@@ -56,11 +57,16 @@ public class MainFrame extends JFrame {
 		formPanel.setFormListener(new FormListener() {
 			public void formEventOccurred(FormEvent e) {
 				if(e.isOption()) {
-						textPanel.appendText(controller.login());
-						formPanel.setVisible(false);
+						if(controller.login(e)) {
+							formPanel.setVisible(false);
+							toolbar.setVisible(true);
+						}
+						else {
+							textPanel.appendText("Login Failed\n");
+						}
 				}
 				else {
-					textPanel.appendText(controller.register());
+					textPanel.appendText(controller.register(e));
 				}
 			}
 		});
@@ -115,6 +121,7 @@ public class MainFrame extends JFrame {
 				textPanel.setText("");
 				textPanel.appendText(controller.logout());
 				formPanel.setVisible(true);
+				toolbar.setVisible(false);
 			}
 		});
 		

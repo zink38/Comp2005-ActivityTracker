@@ -1,6 +1,7 @@
 package controller;
 
 import model.Model;
+import gui.FormEvent;
 
 public class Controller {
 	Model model = new Model();
@@ -8,8 +9,10 @@ public class Controller {
 	public Controller() {
 		
 	}
-	public String login(){
-		return model.getAccount();
+	public boolean login(FormEvent ev){
+		String userName = ev.getUserName();
+		String password = ev.getPassword();
+		return model.getAccount(userName, password);
 	}
 	public String save() {
 		return model.saveToFile();
@@ -20,8 +23,10 @@ public class Controller {
 	public String removeData() {
 		return model.removeData();
 	}
-	public String register() {
-		return model.addAccount();
+	public String register(FormEvent ev) {
+		String userName = ev.getUserName();
+		String password = ev.getPassword();
+		return model.createAccount(userName, password);
 	}
 	public String logout() {
 		return "Data Restricted\n";
