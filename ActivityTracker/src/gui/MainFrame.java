@@ -4,9 +4,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.util.LinkedList;
-import java.util.List;
+import java.io.IOException;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -21,7 +21,8 @@ public class MainFrame extends JFrame {
 	private Toolbar toolbar;
 	private FormPanel formPanel;
 	private Controller controller;
-
+	private TablePanel tablePanel;
+	private JFileChooser fileChooser;
 	
 	public MainFrame() {
 		super("Activity Tracker");
@@ -32,11 +33,16 @@ public class MainFrame extends JFrame {
 		toolbar = new Toolbar();
 		textPanel = new TextPanel();
 		formPanel = new FormPanel();
-
+		tablePanel = new TablePanel();
+		fileChooser = new JFileChooser();
+		
+		fileChooser.addChoosableFileFilter(new DeviceFileFilter());
+		
 		setJMenuBar(createMenuBar());
 		
 		textPanel.setEnabled(false);
 		toolbar.setVisible(false);
+		tablePanel.setVisible(false);
 		
 		toolbar.setButtonListener(new ButtonListener() {
 			public void sortEmitted() {
@@ -60,6 +66,7 @@ public class MainFrame extends JFrame {
 						if(controller.login(e)) {
 							formPanel.setVisible(false);
 							toolbar.setVisible(true);
+							tablePanel.setActivityData(controller.getActiveUser().getActivities());
 						}
 						else {
 							textPanel.appendText("Login Failed\n");
@@ -72,9 +79,11 @@ public class MainFrame extends JFrame {
 		});
 		
 		
+		
 		add(formPanel, BorderLayout.WEST);
 		add(toolbar, BorderLayout.NORTH);
-		add(textPanel, BorderLayout.CENTER);
+		add(textPanel, BorderLayout.EAST);
+		
 
 		
 		setMinimumSize(new Dimension(500,400));
@@ -112,7 +121,15 @@ public class MainFrame extends JFrame {
 		
 		importDeviceItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				textPanel.appendText(controller.importDevice());				
+				if(fileChooser.showOpenDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
+					try {
+						controller.importDevice(fileChooser.getSelectedFile());
+						tablePanel.update();
+					} catch (IOException e1) {
+						JOptionPane.showMessageDialog(MainFrame.this, "Could Not Load Data From File.",
+								"Error",JOptionPane.ERROR_MESSAGE);
+					}
+				}
 			}
 		});
 		

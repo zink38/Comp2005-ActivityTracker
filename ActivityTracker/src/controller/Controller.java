@@ -1,7 +1,11 @@
 package controller;
-//Keegan was here 
-import model.Model;
+
+import java.io.File;
+import java.io.IOException;
+
 import gui.FormEvent;
+import model.Account;
+import model.Model;
 
 public class Controller {
 	Model model = new Model();
@@ -12,13 +16,16 @@ public class Controller {
 	public boolean login(FormEvent ev){
 		String userName = ev.getUserName();
 		String password = ev.getPassword();
-		return model.getAccount(userName, password);
+		return model.login(userName, password);
+	}
+	public Account getActiveUser() {
+		return model.getActiveUser();
 	}
 	public String save() {
 		return model.saveToFile();
 	}
-	public String importDevice() {
-		return model.loadFromFile();
+	public void importDevice(File file) throws IOException {
+		model.importDevice(file);
 	}
 	public String removeData() {
 		return model.removeData();
