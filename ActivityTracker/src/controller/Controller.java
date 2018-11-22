@@ -32,7 +32,7 @@ public class Controller {
 	}
 	public void importDevice(File file) throws IOException {
 		model.importDevice(file);
-		System.out.println("Controller");
+		
 	}
 	public String removeData() {
 		return model.removeData();

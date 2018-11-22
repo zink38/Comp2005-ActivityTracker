@@ -129,10 +129,7 @@ public class MainFrame extends JFrame {
 					try {
 						controller.importDevice(fileChooser.getSelectedFile());
 						tablePanel.update();
-						System.out.println("TEST");
-						for (Activity activity: controller.getActiveUser().getActivities()) {
-							System.out.println(activity.getDate());
-						}
+						
 					} catch (IOException e1) {
 						JOptionPane.showMessageDialog(MainFrame.this, "Could Not Load Data From File.",
 								"Error",JOptionPane.ERROR_MESSAGE);

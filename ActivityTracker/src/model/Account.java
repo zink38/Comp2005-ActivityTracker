@@ -40,7 +40,7 @@ public class Account {
 	public void addDevice(Device device) {
 		devices.add(device);
 		activities.addAll(device.getActivities());
-		System.out.println("Account");
+		
 	}
 	
 	public ArrayList<Activity> getActivities(){

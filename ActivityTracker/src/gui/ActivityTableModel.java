@@ -15,7 +15,7 @@ public class ActivityTableModel extends AbstractTableModel {
 	}
 	
 	public String getColumnName(int column) {
-		System.out.println(" YO ");
+		
 		return colNames[column];
 	}
 	

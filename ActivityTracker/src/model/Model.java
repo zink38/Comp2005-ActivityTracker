@@ -105,6 +105,7 @@ public class Model {
 				distance = Double.parseDouble(data[1]);
 				altitude = Double.parseDouble(data[2]);
 				date = data[3];
+				System.out.println(dataDump);
 				if(duration == 0) {
 					activity = new Activity(date);
 					if(activity != null) {
