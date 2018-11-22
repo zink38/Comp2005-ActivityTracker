@@ -2,9 +2,11 @@ package controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import gui.FormEvent;
 import model.Account;
+import model.Activity;
 import model.Model;
 
 public class Controller {
@@ -21,11 +23,16 @@ public class Controller {
 	public Account getActiveUser() {
 		return model.getActiveUser();
 	}
+	
+	public ArrayList<Activity> getUserActivities(){
+		return model.getUserActivities();
+	}
 	public String save() {
 		return model.saveToFile();
 	}
 	public void importDevice(File file) throws IOException {
 		model.importDevice(file);
+		System.out.println("Controller");
 	}
 	public String removeData() {
 		return model.removeData();
@@ -35,8 +42,8 @@ public class Controller {
 		String password = ev.getPassword();
 		return model.createAccount(userName, password);
 	}
-	public String logout() {
-		return "Data Restricted\n";
+	public void logout() {
+		model.logout();
 	}
 	public String isEdit() {
 		return "Prepared for editing\n";

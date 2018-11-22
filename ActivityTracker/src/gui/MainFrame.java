@@ -15,14 +15,16 @@ import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
 
 import controller.Controller;
+import model.Activity;
 
 public class MainFrame extends JFrame {
-	private TextPanel textPanel;
+	//private TextPanel textPanel;
 	private Toolbar toolbar;
 	private FormPanel formPanel;
 	private Controller controller;
 	private TablePanel tablePanel;
 	private JFileChooser fileChooser;
+
 	
 	public MainFrame() {
 		super("Activity Tracker");
@@ -31,31 +33,33 @@ public class MainFrame extends JFrame {
 		
 		controller = new Controller();
 		toolbar = new Toolbar();
-		textPanel = new TextPanel();
+		//textPanel = new TextPanel();
 		formPanel = new FormPanel();
 		tablePanel = new TablePanel();
 		fileChooser = new JFileChooser();
 		
 		fileChooser.addChoosableFileFilter(new DeviceFileFilter());
 		
-		setJMenuBar(createMenuBar());
 		
-		textPanel.setEnabled(false);
+		setJMenuBar(createMenuBar());
+		tablePanel.setData(controller.getUserActivities());
+		//textPanel.setEnabled(false);
 		toolbar.setVisible(false);
-		tablePanel.setVisible(false);
+		//tablePanel.setVisible(true);
+		
 		
 		toolbar.setButtonListener(new ButtonListener() {
 			public void sortEmitted() {
-				textPanel.appendText(controller.sort());
+				//textPanel.appendText(controller.sort());
 			}
 			public void editEmitted() {
-				textPanel.setEnabled(true);
-				textPanel.appendText(controller.isEdit());
+				//textPanel.setEnabled(true);
+				//textPanel.appendText(controller.isEdit());
 				toolbar.isEdit(true);
 			}
 			public void doneEmitted() {
-				textPanel.setEnabled(false);
-				textPanel.appendText(controller.updateDB());
+				//textPanel.setEnabled(false);
+				//textPanel.appendText(controller.updateDB());
 				toolbar.isEdit(false);
 			}
 		});
@@ -66,14 +70,14 @@ public class MainFrame extends JFrame {
 						if(controller.login(e)) {
 							formPanel.setVisible(false);
 							toolbar.setVisible(true);
-							tablePanel.setActivityData(controller.getActiveUser().getActivities());
+							tablePanel.setData(controller.getUserActivities());
 						}
 						else {
-							textPanel.appendText("Login Failed\n");
+							
 						}
 				}
 				else {
-					textPanel.appendText(controller.register(e));
+					controller.register(e);
 				}
 			}
 		});
@@ -82,9 +86,9 @@ public class MainFrame extends JFrame {
 		
 		add(formPanel, BorderLayout.WEST);
 		add(toolbar, BorderLayout.NORTH);
-		add(textPanel, BorderLayout.EAST);
+		add(tablePanel, BorderLayout.CENTER);
 		
-
+		
 		
 		setMinimumSize(new Dimension(500,400));
 		setSize(600, 500);
@@ -125,6 +129,10 @@ public class MainFrame extends JFrame {
 					try {
 						controller.importDevice(fileChooser.getSelectedFile());
 						tablePanel.update();
+						System.out.println("TEST");
+						for (Activity activity: controller.getActiveUser().getActivities()) {
+							System.out.println(activity.getDate());
+						}
 					} catch (IOException e1) {
 						JOptionPane.showMessageDialog(MainFrame.this, "Could Not Load Data From File.",
 								"Error",JOptionPane.ERROR_MESSAGE);
@@ -135,8 +143,7 @@ public class MainFrame extends JFrame {
 		
 		logoutItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				textPanel.setText("");
-				textPanel.appendText(controller.logout());
+				controller.logout();
 				formPanel.setVisible(true);
 				toolbar.setVisible(false);
 			}
@@ -144,7 +151,7 @@ public class MainFrame extends JFrame {
 		
 		exportDataItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textPanel.appendText(controller.save());
+				controller.save();
 			}
 		});
 		

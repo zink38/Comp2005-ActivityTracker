@@ -1,19 +1,24 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 public class Account {
 	private String userName;
 	private String password;
-	private List<Device> devices;
-	private List<Activity> activities;
+	private ArrayList<Device> devices;
+	private ArrayList<Activity> activities;
+	
+	public Account() {
+	
+	}
 	
 	public Account(String name, String password){
 		this.userName = name;
 		this.password = password;
-		this.devices = new LinkedList<Device>();
-		this.activities = new LinkedList<Activity>();
+		this.devices = new ArrayList<Device>();
+		this.activities = new ArrayList<Activity>();
 	}
 	
 	public String getUserName() {
@@ -34,9 +39,11 @@ public class Account {
 
 	public void addDevice(Device device) {
 		devices.add(device);
+		activities.addAll(device.getActivities());
+		System.out.println("Account");
 	}
 	
-	public List<Activity> getActivities(){
+	public ArrayList<Activity> getActivities(){
 		return activities;
 	}
 	

@@ -17,6 +17,15 @@ public class Device {
 	public void addActivity(Activity activity) {
 		this.activities.add(activity);
 	}
+
+	public List<Activity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<Activity> activities) {
+		this.activities = activities;
+	}
+	
 	
 	
 }

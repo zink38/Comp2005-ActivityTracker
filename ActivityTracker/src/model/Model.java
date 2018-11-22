@@ -3,16 +3,20 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class Model {
-	private Account activeUser = null;
-	private List<Account> accounts;
+	private Account activeUser;
+	private ArrayList<Activity> userActivities;
+	private ArrayList<Account> accounts;
 	
 	public Model() {
-		accounts = new LinkedList<Account>();
+		accounts = new ArrayList<Account>();
+		activeUser = new Account();
+		userActivities = new ArrayList<Activity>();
 	}
 	
 	public String removeAccount() {
@@ -24,6 +28,10 @@ public class Model {
 		return activeUser;
 	}
 	
+	public ArrayList<Activity> getUserActivities(){
+		return userActivities;
+	}
+	
 	public boolean login(String userName, String password) {
 		boolean result = false;
 		for(Account account: accounts) {
@@ -31,11 +39,16 @@ public class Model {
 				if(account.getPassword().equals(password)) {
 					result = true;	
 					activeUser = account;
+					userActivities = activeUser.getActivities();
 				}
 				
 			}	
 		}
 		return result;
+	}
+	
+	public void logout() {
+		activeUser = new Account();
 	}
 	
 	public String removeData() {
@@ -68,7 +81,8 @@ public class Model {
 	}
 	public void importDevice(File file) throws IOException {
 		Device device = createDevice(file);
-		activeUser.addDevice(device);	
+		activeUser.addDevice(device);
+		
 	}
 	
 	public Device createDevice(File file) throws IOException {
@@ -92,11 +106,15 @@ public class Model {
 				altitude = Double.parseDouble(data[2]);
 				date = data[3];
 				if(duration == 0) {
+					activity = new Activity(date);
 					if(activity != null) {
 						device.addActivity(activity);
 					}
-					activity = new Activity(date);
+					
 				}
+				activity.setDistance(distance);
+				activity.setDuration(duration);
+				activity.setMaxAltitude(altitude);
 				activity.addDataPoint(duration, distance, altitude);				
 			}
 			inputStream.close();
