@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,15 +10,15 @@ public class Activity {
 	private double distance;
 	private double maxAltitude;
 	private String date;
-	private List<ActivityDataPoint> dataPoints;
+	private ArrayList<ActivityDataPoint> dataPoints;
 	
 	public Activity(String date){
-		this.dataPoints = new LinkedList<ActivityDataPoint>();
+		this.dataPoints = new ArrayList<ActivityDataPoint>();
 		this.date = date;
 		
 	}
-	public void addDataPoint(double duration, double distance, double altitude) {
-		ActivityDataPoint point = new ActivityDataPoint(duration, distance, altitude);
+	public void addDataPoint(double duration, double distance, double altitude, String date) {
+		ActivityDataPoint point = new ActivityDataPoint(duration, distance, altitude, date);
 		this.dataPoints.add(point);
 	}
 	public double getDuration() {
@@ -43,6 +44,9 @@ public class Activity {
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public ArrayList<ActivityDataPoint> getDataPoints(){
+		return dataPoints;
 	}
 	
 }

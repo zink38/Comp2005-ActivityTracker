@@ -1,14 +1,14 @@
 package gui;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.swing.table.AbstractTableModel;
 
 import model.Activity;
 
 public class ActivityTableModel extends AbstractTableModel {
-	private List<Activity> activities;
-	private String[] colNames = {"Duration","Distance","Altitdude","Date"};
+	private ArrayList<Activity> activities;
+	private String[] colNames = {"Duration","Distance","Altitude","Date"};
 	
 	public ActivityTableModel() {
 		
@@ -19,7 +19,7 @@ public class ActivityTableModel extends AbstractTableModel {
 		return colNames[column];
 	}
 	
-	public void setData(List<Activity> activities) {
+	public void setData(ArrayList<Activity> activities) {
 		this.activities = activities;
 	}
 	
@@ -29,7 +29,7 @@ public class ActivityTableModel extends AbstractTableModel {
 	}
 
 	
-	public int getRowCount() {
+	public int getRowCount() throws NullPointerException {
 		
 		return activities.size();
 	}
@@ -41,19 +41,19 @@ public class ActivityTableModel extends AbstractTableModel {
 		switch(col) {
 		case 0:
 			value = activity.getDuration();
-			System.out.println("Duration");
+			
 			break;
 		case 1:
 			value = activity.getDistance();
-			System.out.println("Distance");
+			
 			break;
 		case 2:
 			value = activity.getMaxAltitude();
-			System.out.println("Altitude");
+			
 			break;
 		case 3:
 			value = activity.getDate();
-			System.out.println("Date");
+			
 			break;
 		default:
 			value = null;

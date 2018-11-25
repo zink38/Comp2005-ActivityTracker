@@ -116,7 +116,7 @@ public class Model {
 				activity.setDistance(distance);
 				activity.setDuration(duration);
 				activity.setMaxAltitude(altitude);
-				activity.addDataPoint(duration, distance, altitude);				
+				activity.addDataPoint(duration, distance, altitude,date);				
 			}
 			inputStream.close();
 		}

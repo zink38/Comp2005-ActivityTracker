@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -16,61 +17,68 @@ import javax.swing.KeyStroke;
 
 import controller.Controller;
 import model.Activity;
+import model.ActivityDataPoint;
 
 public class MainFrame extends JFrame {
 	//private TextPanel textPanel;
-	private Toolbar toolbar;
+	private StatPanel statPanel;
 	private FormPanel formPanel;
 	private Controller controller;
 	private TablePanel tablePanel;
 	private JFileChooser fileChooser;
-
+	private ArrayList<Activity> defaultActivities;
+	private ArrayList<ActivityDataPoint> defaultDataPoints;
 	
 	public MainFrame() {
 		super("Activity Tracker");
 		
-		setLayout(new BorderLayout());
+		setLayout(null);
 		
 		controller = new Controller();
-		toolbar = new Toolbar();
+		
 		//textPanel = new TextPanel();
+		statPanel = new StatPanel();
 		formPanel = new FormPanel();
 		tablePanel = new TablePanel();
 		fileChooser = new JFileChooser();
+		defaultActivities = new ArrayList<Activity>(); 
+		defaultDataPoints = new ArrayList<ActivityDataPoint>();
 		
 		fileChooser.addChoosableFileFilter(new DeviceFileFilter());
 		
 		
 		setJMenuBar(createMenuBar());
-		tablePanel.setData(controller.getUserActivities());
+		tablePanel.setActivities(defaultActivities);
+		tablePanel.setDataPoints(defaultDataPoints);
+		
 		//textPanel.setEnabled(false);
-		toolbar.setVisible(false);
+		statPanel.setVisible(false);
 		//tablePanel.setVisible(true);
 		
-		
-		toolbar.setButtonListener(new ButtonListener() {
-			public void sortEmitted() {
-				//textPanel.appendText(controller.sort());
-			}
-			public void editEmitted() {
-				//textPanel.setEnabled(true);
-				//textPanel.appendText(controller.isEdit());
-				toolbar.isEdit(true);
-			}
-			public void doneEmitted() {
-				//textPanel.setEnabled(false);
-				//textPanel.appendText(controller.updateDB());
-				toolbar.isEdit(false);
+		tablePanel.setActivityTableListener(new ActivityTableListener() {
+			public void changeTable(int row) {
+				tablePanel.changeTable();
+				tablePanel.setDataPoints(controller.getUserActivities().get(row).getDataPoints());
+				tablePanel.updateDataPoint();				
 			}
 		});
+		
+		tablePanel.setDataPointTableListener(new DataPointTableListener() {
+			public void changeTable() {
+				tablePanel.changeTable();
+				//tablePanel.updateActivity();
+			}
+		});
+		
 		
 		formPanel.setFormListener(new FormListener() {
 			public void formEventOccurred(FormEvent e) {
 				if(e.isOption()) {
 						if(controller.login(e)) {
 							formPanel.setVisible(false);
-							toolbar.setVisible(true);
-							tablePanel.setData(controller.getUserActivities());
+							statPanel.setVisible(true);
+							tablePanel.setActivities(controller.getUserActivities());
+							tablePanel.updateActivity();
 						}
 						else {
 							
@@ -83,17 +91,21 @@ public class MainFrame extends JFrame {
 		});
 		
 		
-		
-		add(formPanel, BorderLayout.WEST);
-		add(toolbar, BorderLayout.NORTH);
-		add(tablePanel, BorderLayout.CENTER);
-		
-		
-		
-		setMinimumSize(new Dimension(500,400));
-		setSize(600, 500);
+		setMinimumSize(new Dimension(700,600));
+		setMaximumSize(new Dimension(700,600));
+		setSize(700, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
+		
+		statPanel.setBounds(0,0,300,600);
+		formPanel.setBounds(0,0,300,600);
+		tablePanel.setBounds(300,0,400,600);
+		
+		add(statPanel);
+		add(formPanel);
+		add(tablePanel);
+		
+		
 	}
 	private JMenuBar createMenuBar() {
 		
@@ -128,7 +140,8 @@ public class MainFrame extends JFrame {
 				if(fileChooser.showOpenDialog(MainFrame.this) == JFileChooser.APPROVE_OPTION) {
 					try {
 						controller.importDevice(fileChooser.getSelectedFile());
-						tablePanel.update();
+						tablePanel.updateActivity();
+						tablePanel.updateDataPoint();
 						
 					} catch (IOException e1) {
 						JOptionPane.showMessageDialog(MainFrame.this, "Could Not Load Data From File.",
@@ -141,8 +154,13 @@ public class MainFrame extends JFrame {
 		logoutItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
 				controller.logout();
+				if(!tablePanel.getTableState()) {
+					tablePanel.changeTable();
+				}
+				tablePanel.setActivities(defaultActivities);
+				tablePanel.updateActivity();
 				formPanel.setVisible(true);
-				toolbar.setVisible(false);
+				statPanel.setVisible(false);
 			}
 		});
 		
