@@ -8,7 +8,7 @@ import model.ActivityDataPoint;
 
 public class DataPointTableModel extends AbstractTableModel {
 	private ArrayList<ActivityDataPoint> dataPoints;
-	private String[] colNames = {"Duration","Distance","Altitude","Date"};
+	private String[] colNames = {"Duration","Distance","Altitude","Altitude Change","Date"};
 	
 	public DataPointTableModel() {
 		
@@ -25,7 +25,7 @@ public class DataPointTableModel extends AbstractTableModel {
 	
 	public int getColumnCount() {
 		
-		return 4;
+		return 5;
 	}
 
 	
@@ -52,6 +52,10 @@ public class DataPointTableModel extends AbstractTableModel {
 			
 			break;
 		case 3:
+			value = (double) Math.round(dataPoint.getAltitudeChange()*100)/100;
+			
+			break;
+		case 4:
 			value = dataPoint.getDate();
 			
 			break;

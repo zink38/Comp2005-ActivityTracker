@@ -88,11 +88,18 @@ public class Model {
 	public Device createDevice(File file) throws IOException {
 		
 		String dataDump;
+		String dateDataDump;
 		String[] data;
+		String[] dateData;
 		double distance;
 		double duration;
 		double altitude;
-		String date;
+		double altitude1 = 0;
+		double altitudeChange;
+		int day;
+		int month;
+		int year;
+		Date date;
 		Device device;
 		Activity activity = null;
 		device = new Device(file);
@@ -104,19 +111,25 @@ public class Model {
 				duration = Double.parseDouble(data[0]);
 				distance = Double.parseDouble(data[1]);
 				altitude = Double.parseDouble(data[2]);
-				date = data[3];
-				System.out.println(dataDump);
+				dateDataDump = data[3];
+				dateData = dateDataDump.split("-");
+				day = Integer.parseInt(dateData[0]);
+				month = Integer.parseInt(dateData[1]);
+				year = Integer.parseInt(dateData[2]);
+				date = new Date(day,month,year);
 				if(duration == 0) {
+					altitude1 = 0;
 					activity = new Activity(date);
 					if(activity != null) {
 						device.addActivity(activity);
 					}
 					
 				}
+				altitudeChange = altitude - altitude1;
+				altitude1 = altitude;
 				activity.setDistance(distance);
 				activity.setDuration(duration);
-				activity.setMaxAltitude(altitude);
-				activity.addDataPoint(duration, distance, altitude,date);				
+				activity.addDataPoint(duration, distance, altitude,altitudeChange, date);				
 			}
 			inputStream.close();
 		}
@@ -129,7 +142,10 @@ public class Model {
 	public String addData() {
 		return "Data Added to Database\n";
 	}
-	public String sortData() {
-		return "Data was Sorted\n";
-	}
+	//public int searchMaxDistance(Date date1, Date date2) {
+		//int maxDistance;
+		//for(Activity activity: getUserActivities()) {
+			//if(activ)
+		
+	//}
 }

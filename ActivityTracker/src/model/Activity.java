@@ -5,20 +5,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Activity {
-	private double type;
+	private Activities type;
 	private double duration;
 	private double distance;
 	private double maxAltitude;
-	private String date;
+	private Date date;
 	private ArrayList<ActivityDataPoint> dataPoints;
 	
-	public Activity(String date){
+	public Activity(Date date){
 		this.dataPoints = new ArrayList<ActivityDataPoint>();
 		this.date = date;
 		
 	}
-	public void addDataPoint(double duration, double distance, double altitude, String date) {
-		ActivityDataPoint point = new ActivityDataPoint(duration, distance, altitude, date);
+	public void addDataPoint(double duration, double distance, double altitude,double altitudeChange, Date date) {
+		ActivityDataPoint point = new ActivityDataPoint(duration, distance, altitude, altitudeChange, date);
+		if(altitude > this.maxAltitude) {
+			this.maxAltitude = altitude;
+		}
 		this.dataPoints.add(point);
 	}
 	public double getDuration() {
@@ -39,10 +42,10 @@ public class Activity {
 	public void setMaxAltitude(double maxAltitude) {
 		this.maxAltitude = maxAltitude;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public ArrayList<ActivityDataPoint> getDataPoints(){

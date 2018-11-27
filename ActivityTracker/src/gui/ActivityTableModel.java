@@ -8,7 +8,7 @@ import model.Activity;
 
 public class ActivityTableModel extends AbstractTableModel {
 	private ArrayList<Activity> activities;
-	private String[] colNames = {"Duration","Distance","Altitude","Date"};
+	private String[] colNames = {"Duration","Distance","Max Altitude","Date"};
 	
 	public ActivityTableModel() {
 		

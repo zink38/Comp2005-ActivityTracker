@@ -51,7 +51,5 @@ public class Controller {
 	public String updateDB() {
 		return model.addData();
 	}
-	public String sort() {
-		return model.sortData();
-	}
+	
 }
