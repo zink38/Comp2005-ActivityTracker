@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import gui.FormEvent;
 import model.Account;
 import model.Activity;
+import model.Date;
 import model.Model;
 
 public class Controller {
@@ -47,6 +48,11 @@ public class Controller {
 	}
 	public String isEdit() {
 		return "Prepared for editing\n";
+	}
+	public ArrayList<Activity> filterByDate(Date date1, Date date2, ArrayList<Activity> activities){
+		ArrayList<Activity> filteredActivities;
+		filteredActivities =  model.filterByDate(date1, date2, activities);
+		return filteredActivities;
 	}
 	public String updateDB() {
 		return model.addData();

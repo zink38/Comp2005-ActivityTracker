@@ -1,5 +1,4 @@
 package gui;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,6 +17,7 @@ import javax.swing.KeyStroke;
 import controller.Controller;
 import model.Activity;
 import model.ActivityDataPoint;
+import model.Date;
 
 public class MainFrame extends JFrame {
 	//private TextPanel textPanel;
@@ -90,6 +90,22 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
+		statPanel.setFilterListener(new FilterListener() {
+						
+			public void filterEventOccurred(FilterEvent e) {
+				ArrayList<Activity> activities;
+				ArrayList<Activity> filteredActivities;
+				Date date1;
+				Date date2; 
+				date1 = e.getDate1();
+				date2 = e.getDate2();
+				activities = controller.getUserActivities();
+				filteredActivities = controller.filterByDate(date1, date2, activities);
+				tablePanel.setActivities(filteredActivities);
+				tablePanel.updateActivity();
+				
+			}
+		});
 		
 		setMinimumSize(new Dimension(800,600));
 		setMaximumSize(new Dimension(800,600));

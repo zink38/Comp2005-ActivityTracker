@@ -22,6 +22,9 @@ public class ActivityTableModel extends AbstractTableModel {
 	public void setData(ArrayList<Activity> activities) {
 		this.activities = activities;
 	}
+	public ArrayList<Activity> getData() {
+		return this.activities;
+	}
 	
 	public int getColumnCount() {
 		

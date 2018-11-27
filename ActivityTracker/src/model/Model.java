@@ -142,9 +142,15 @@ public class Model {
 	public String addData() {
 		return "Data Added to Database\n";
 	}
-
-	public String sortData() {
-		return "Data was Sorted\n";
+ 
+	public ArrayList<Activity> filterByDate(Date date1, Date date2, ArrayList<Activity> activities) {
+		ArrayList<Activity> filteredActivities = new ArrayList<Activity>();
+		for(Activity activity: activities) {
+			if(activity.getDate().getValue() >= date1.getValue() && activity.getDate().getValue() <= date2.getValue()) {
+				filteredActivities.add(activity);
+			}
+		}
+		return filteredActivities;
 	}
 	public void sortByDistance() {
 		Collections.sort(userActivities, new Comparator<Activity>(){

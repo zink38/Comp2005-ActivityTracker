@@ -98,6 +98,11 @@ public class TablePanel extends JPanel {
 	public void setDataPoints(ArrayList<ActivityDataPoint> dataPoints) {
 		dataPointTableModel.setData(dataPoints);
 	}
+	
+	public ArrayList<Activity> getActivities(){
+		return activityTableModel.getData();
+	}
+	
 	public void updateActivity() {
 		activityTableModel.fireTableDataChanged();	
 	}

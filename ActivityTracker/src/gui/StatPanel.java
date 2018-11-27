@@ -5,12 +5,16 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
+
+import model.Date;
 
 
 
@@ -27,6 +31,8 @@ public class StatPanel extends JPanel {
 	private JLabel maxDurationL;
 	private JLabel maxAltitudeL;
 	private JButton filterBtn;
+	private FilterListener filterListener;
+	
 	public StatPanel() {
 		Dimension dim = getPreferredSize();
 		dim.width = 300;
@@ -42,6 +48,35 @@ public class StatPanel extends JPanel {
 		maxDistanceL = new JLabel("Max Distance: ");
 		maxDurationL = new JLabel("Max Duration: ");
 		maxAltitudeL = new JLabel("Max Altitude: ");
+		
+		filterBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int day;
+				int month;
+				int year;
+				Date date1;
+				Date date2;
+				String[] dateData;
+				String dateDump1 = dateField1.getText();
+				String dateDump2 = dateField2.getText();
+				dateData = dateDump1.split("/");
+				day = Integer.parseInt(dateData[0]);
+				month = Integer.parseInt(dateData[1]);
+				year = Integer.parseInt(dateData[2]);
+				date1 = new Date(day,month,year);
+				dateData = dateDump2.split("/");
+				day = Integer.parseInt(dateData[0]);
+				month = Integer.parseInt(dateData[1]);
+				year = Integer.parseInt(dateData[2]);
+				date2 = new Date(day,month,year);
+
+				FilterEvent ev = new FilterEvent(this, date1, date2);
+				
+				if(filterListener != null) {
+					filterListener.filterEventOccurred(ev);
+				}
+			}
+		});
 		
 		Border innerBorder = BorderFactory.createTitledBorder("Statistics");
 		Border outerBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
@@ -149,9 +184,9 @@ public class StatPanel extends JPanel {
 		gc.anchor = GridBagConstraints.FIRST_LINE_START;
 		gc.insets = new Insets(0,0,0,0);
 		add(filterBtn,gc);
-		
-
-	
+	}
+	public void setFilterListener(FilterListener filterListener) {
+		this.filterListener = filterListener;
 	}
 	
 }
