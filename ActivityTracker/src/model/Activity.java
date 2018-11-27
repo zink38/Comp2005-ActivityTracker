@@ -90,5 +90,5 @@ public class Activity {
 	public void setCalories(double cals) {
 		calories = cals;
 	}
-	//Working on avgs for all workouts
+
 }

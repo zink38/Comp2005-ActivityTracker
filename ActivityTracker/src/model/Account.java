@@ -102,4 +102,65 @@ public class Account {
 		return activities;
 	}
 	
+	//Could only get this working under the account class. Feel free to move it to the Activity class if you know how.
+	public double avgTotalDuration() {
+		double temp;
+		double avg;
+		ArrayList <Double> totals = new ArrayList<Double>();
+		ArrayList<Activity> workouts = this.getActivities();
+		
+		for (int i = 0; i < workouts.size(); i++) {
+			temp = workouts.get(i).getDuration();
+			totals.add(temp);
+		}
+		
+		double sum = 0;
+		for (int j = 0; j < totals.size(); j++) {
+			sum += totals.get(j);
+		}
+		double numOfWorkouts = workouts.size();
+		avg = sum / numOfWorkouts;
+		return avg;
+	}
+	
+	public double avgTotalDistance() {
+		double temp;
+		double avg;
+		ArrayList <Double> totals = new ArrayList<Double>();
+		ArrayList<Activity> workouts = this.getActivities();
+		
+		for (int i = 0; i < workouts.size(); i++) {
+			temp = workouts.get(i).getDistance();
+			totals.add(temp);
+		}
+		
+		double sum = 0;
+		for (int j = 0; j < totals.size(); j++) {
+			sum += totals.get(j);
+		}
+		double numOfWorkouts = workouts.size();
+		avg = sum / numOfWorkouts;
+		return avg;
+	}
+	
+	public double avgTotalCalories() {
+		double temp;
+		double avg;
+		ArrayList <Double> totals = new ArrayList<Double>();
+		ArrayList<Activity> workouts = this.getActivities();
+		
+		for (int i = 0; i < workouts.size(); i++) {
+			temp = workouts.get(i).getCalories();
+			totals.add(temp);
+		}
+		
+		double sum = 0;
+		for (int j = 0; j < totals.size(); j++) {
+			sum += totals.get(j);
+		}
+		double numOfWorkouts = workouts.size();
+		avg = sum / numOfWorkouts;
+		return avg;
+	}
+	
 }
