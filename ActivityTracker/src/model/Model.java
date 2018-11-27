@@ -152,6 +152,7 @@ public class Model {
 		}
 		return filteredActivities;
 	}
+	//sorting puts from greatest to least
 	public void sortByDistance() {
 		Collections.sort(userActivities, new Comparator<Activity>(){
 	        
@@ -175,6 +176,31 @@ public class Model {
 	                return -1; 
 	                }
 	              if(n1.getDuration() < n2.getDuration()){
+	               return 1; 
+	               }
+	              return 0;
+	              }
+	            });
+			  
+		  }
+	public ArrayList<Activity> filterByMonth(int month,ArrayList<Activity> activities) {
+		ArrayList<Activity> filtActivity = new ArrayList<Activity>();
+		for(Activity activity: activities) {
+			if(activity.getDate().getMonth()==month) {
+				filtActivity.add(activity);
+			}
+		}
+		return filtActivity;
+	}
+	
+	public void sortByDate() {
+		Collections.sort(userActivities, new Comparator<Activity>(){
+	         @Override
+	          public int compare(Activity n1, Activity n2){
+	              if( n1.getDate().getValue() > n2.getDate().getValue()){
+	                return -1; 
+	                }
+	              if(n1.getDate().getValue() < n2.getDate().getValue()){
 	               return 1; 
 	               }
 	              return 0;
