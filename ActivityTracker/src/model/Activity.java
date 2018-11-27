@@ -10,6 +10,8 @@ public class Activity {
 	private double distance;
 	private double altGained;
 	private double altLost;
+	private double pace;
+	private double calories;
 	private Date date;
 	private ArrayList<ActivityDataPoint> dataPoints;
 	
@@ -31,12 +33,16 @@ public class Activity {
 		this.dataPoints.add(point);
 	}
 	public double getDuration() {
+		int lastPos = this.dataPoints.size() - 1; 
+		duration = this.dataPoints.get(lastPos).getCurrentDuration();
 		return duration;
 	}
 	public void setDuration(double duration) {
 		this.duration = duration;
 	}
 	public double getDistance() {
+		int lastPos = this.dataPoints.size() - 1; 
+		distance = this.dataPoints.get(lastPos).getCurrentDistance();
 		return distance;
 	}
 	public void setDistance(double distance) {
@@ -64,5 +70,25 @@ public class Activity {
 	public ArrayList<ActivityDataPoint> getDataPoints(){
 		return dataPoints;
 	}
-	
+	public double getPace() {
+		double timeInMin = this.getDuration() / 60;
+		double distInKm = this.getDistance() / 1000;
+		pace = distInKm / timeInMin;
+		return pace;
+	}
+	public void setPace(double distance, double duration) {
+		double timeInMin = duration/60;
+		double distInKm = distance / 1000;
+		pace = distInKm / timeInMin;
+	}
+	public double getCalories() {
+		int lastPos = this.dataPoints.size() - 1; 
+		double dist = this.dataPoints.get(lastPos).getCurrentDistance();
+		calories = dist/ 11.44876;
+		return calories;
+	}
+	public void setCalories(double cals) {
+		calories = cals;
+	}
+	//Working on avgs for all workouts
 }
