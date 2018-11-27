@@ -5,12 +5,21 @@ public class ActivityDataPoint {
 	private double currentDistance;
 	private double currentAltitude;
 	private String date;
+	private int day;
+	private int month;
+	private int year;
+	
 	 
 	public ActivityDataPoint(double _cDur, double _cDis, double _cAlt, String date) {
 		this.currentAltitude = _cAlt;
 		this.currentDistance = _cDis;
 		this.currentDuration = _cDur;
+		String[] datesplit= date.split("-");
+		this.day = Integer.parseInt(datesplit[0]);
+		this.month = Integer.parseInt(datesplit[1]);
+		this.year = Integer.parseInt(datesplit[2]);
 		this.date = date;
+		
 	}
 
 	public double getCurrentDuration() {
@@ -36,7 +45,13 @@ public class ActivityDataPoint {
 	public void setCurrentAltitude(double currentAltitude) {
 		this.currentAltitude = currentAltitude;
 	}
-	public String getDate() {
-		return date;
+	public int getYear() {
+		return year;
+	}
+	public int getMonth() {
+		return month;
+	}
+	public int getDay() {
+		return day;
 	}
 }
