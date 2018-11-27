@@ -9,6 +9,8 @@ public class Activity {
 	private double duration;
 	private double distance;
 	private double maxAltitude;
+	private double altGained;
+	private double altLost;
 	private Date date;
 	private ArrayList<ActivityDataPoint> dataPoints;
 	
@@ -22,6 +24,14 @@ public class Activity {
 		if(altitude > this.maxAltitude) {
 			this.maxAltitude = altitude;
 		}
+		//added altGained and altLost functions
+		if(altitudeChange >= 0) {
+			this.altGained += altitudeChange;
+		}
+		else {
+			this.altLost += altitudeChange;
+		}
+		
 		this.dataPoints.add(point);
 	}
 	public double getDuration() {
@@ -41,6 +51,18 @@ public class Activity {
 	}
 	public void setMaxAltitude(double maxAltitude) {
 		this.maxAltitude = maxAltitude;
+	}
+	public double getAltGained() {
+		return altGained;
+	}
+	public void setAltGained(double altGained) {
+		this.altGained = altGained;
+	}
+	public double getAltLost() {
+		return altLost;
+	}
+	public void setAltLost(double altLost) {
+		this.altLost = altLost;
 	}
 	public Date getDate() {
 		return date;
