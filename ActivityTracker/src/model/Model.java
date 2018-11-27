@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Model {
@@ -142,10 +142,39 @@ public class Model {
 	public String addData() {
 		return "Data Added to Database\n";
 	}
-	//public int searchMaxDistance(Date date1, Date date2) {
-		//int maxDistance;
-		//for(Activity activity: getUserActivities()) {
-			//if(activ)
-		
-	//}
+
+	public String sortData() {
+		return "Data was Sorted\n";
+	}
+	public void sortByDistance() {
+		Collections.sort(userActivities, new Comparator<Activity>(){
+	         @Override
+	          public int compare(Activity n1, Activity n2){
+	              if( n1.getDistance() > n2.getDistance()){
+	                return -1; 
+	                }
+	              if(n1.getDistance() < n2.getDistance()){
+	               return 1; 
+	               }
+	              return 0;
+	              }
+	            });
+			  
+		  }
+	public void sortByDuration() {
+		Collections.sort(userActivities, new Comparator<Activity>(){
+	         @Override
+	          public int compare(Activity n1, Activity n2){
+	              if( n1.getDuration() > n2.getDuration()){
+	                return -1; 
+	                }
+	              if(n1.getDuration() < n2.getDuration()){
+	               return 1; 
+	               }
+	              return 0;
+	              }
+	            });
+			  
+		  }
+
 }

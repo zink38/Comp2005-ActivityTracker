@@ -4,15 +4,20 @@ public class ActivityDataPoint {
 	private double currentDuration;
 	private double currentDistance;
 	private double currentAltitude;
+
 	private double altitudeChange;
 	private Date date;
+
 	 
 	public ActivityDataPoint(double _cDur, double _cDis, double _cAlt,double _altCh, Date date) {
 		this.currentAltitude = _cAlt;
 		this.currentDistance = _cDis;
 		this.currentDuration = _cDur;
+
 		this.altitudeChange = _altCh;
+
 		this.date = date;
+		
 	}
 
 	public double getCurrentDuration() {
@@ -38,9 +43,6 @@ public class ActivityDataPoint {
 	public void setCurrentAltitude(double currentAltitude) {
 		this.currentAltitude = currentAltitude;
 	}
-	public Date getDate() {
-		return date;
-	}
 
 	public double getAltitudeChange() {
 		return altitudeChange;
@@ -49,5 +51,14 @@ public class ActivityDataPoint {
 	public void setAltitudeChange(double altitudeChange) {
 		this.altitudeChange = altitudeChange;
 	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	
 	
 }
