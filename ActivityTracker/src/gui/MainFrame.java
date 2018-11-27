@@ -101,8 +101,13 @@ public class MainFrame extends JFrame {
 				date2 = e.getDate2();
 				activities = controller.getUserActivities();
 				filteredActivities = controller.filterByDate(date1, date2, activities);
+				System.out.println(tablePanel.getTableState());
+				if(!tablePanel.getTableState()) {
+					tablePanel.changeTable();
+				}
 				tablePanel.setActivities(filteredActivities);
 				tablePanel.updateActivity();
+				
 				
 			}
 		});

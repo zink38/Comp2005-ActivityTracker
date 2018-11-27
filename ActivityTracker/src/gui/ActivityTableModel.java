@@ -8,7 +8,7 @@ import model.Activity;
 
 public class ActivityTableModel extends AbstractTableModel {
 	private ArrayList<Activity> activities;
-	private String[] colNames = {"Duration","Distance","Max Altitude","Date"};
+	private String[] colNames = {"Duration","Distance","Altitude Gained","Altitude Lost","Date"};
 	
 	public ActivityTableModel() {
 		
@@ -28,7 +28,7 @@ public class ActivityTableModel extends AbstractTableModel {
 	
 	public int getColumnCount() {
 		
-		return 4;
+		return 5;
 	}
 
 	
@@ -51,10 +51,14 @@ public class ActivityTableModel extends AbstractTableModel {
 			
 			break;
 		case 2:
-			value = activity.getMaxAltitude();
+			value = (double) Math.round(activity.getAltGained()*100)/100;;
 			
 			break;
 		case 3:
+			value = (double) Math.round(activity.getAltLost()*100)/100;
+			
+			break;
+		case 4:
 			value = activity.getDate();
 			
 			break;

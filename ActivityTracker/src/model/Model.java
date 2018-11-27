@@ -154,7 +154,7 @@ public class Model {
 	}
 	public void sortByDistance() {
 		Collections.sort(userActivities, new Comparator<Activity>(){
-	         @Override
+	        
 	          public int compare(Activity n1, Activity n2){
 	              if( n1.getDistance() > n2.getDistance()){
 	                return -1; 
