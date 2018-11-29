@@ -10,7 +10,7 @@ public class Account {
 	private ArrayList<Device> devices;
 	private ArrayList<Activity> activities;
 	private ArrayList<Account> friends;
-	private ArrayList<Object> info;
+
 	//private int age;
 	//private String gender;
 	
@@ -25,8 +25,7 @@ public class Account {
 		this.activities = new ArrayList<Activity>();
 		//this.age = age;
 		//this.gender = gender;
-		this.friends = new ArrayList<Account>();
-		this.info = new ArrayList<Object>();
+
 	}
 	
 	public String getUserName() {
@@ -61,41 +60,11 @@ public class Account {
 			this.gender = gender;
 		}
 		*/
-		public ArrayList<Object> getInfo(){
-			return info;
-		}
-		public void setInfo() {
-			info.add(this.userName);
-			//info.add(this.age);
-			//info.add(this.gender);
-		}
 		
-		public ArrayList<Account> getFriends() {
-			return friends;
-		}
-		
-		public void addFriend(Account a) {
-			if (!friends.contains(a)) {
-				friends.add(a);
-			}
-		}
-		public void removeFriend(Account a) {
-			friends.remove(a);
-		}
-		
-		public ArrayList<Activity> getFriendsActivities(Account a) {
-			return a.getActivities();
-		}
-		public ArrayList<Object> getFriendsInfo(Account a){
-			return a.getInfo();
-		}
-		
-		//end of changes
 		
 	public void addDevice(Device device) {
 		devices.add(device);
-		activities.addAll(device.getActivities());
-		
+		activities.addAll(device.getActivities());	
 	}
 	
 	public ArrayList<Activity> getActivities(){
@@ -103,103 +72,5 @@ public class Account {
 	}
 	
 	//Could only get this working under the account class. Feel free to move it to the Activity class if you know how. 
-	public double avgTotalDuration() {
-		double temp;
-		double avg;
-		ArrayList <Double> totals = new ArrayList<Double>();
-		ArrayList<Activity> workouts = this.getActivities();
-		
-		for (int i = 0; i < workouts.size(); i++) {
-			temp = workouts.get(i).getDuration();
-			totals.add(temp);
-		}
-		
-		double sum = 0;
-		for (int j = 0; j < totals.size(); j++) {
-			sum += totals.get(j);
-		}
-		double numOfWorkouts = workouts.size();
-		avg = sum / numOfWorkouts;
-		return avg;
-	}
 	
-	public double avgTotalDistance() {
-		double temp;
-		double avg;
-		ArrayList <Double> totals = new ArrayList<Double>();
-		ArrayList<Activity> workouts = this.getActivities();
-		
-		for (int i = 0; i < workouts.size(); i++) {
-			temp = workouts.get(i).getDistance();
-			totals.add(temp);
-		}
-		
-		double sum = 0;
-		for (int j = 0; j < totals.size(); j++) {
-			sum += totals.get(j);
-		}
-		double numOfWorkouts = workouts.size();
-		avg = sum / numOfWorkouts;
-		return avg;
-	}
-	
-	public double avgTotalCalories() {
-		double temp;
-		double avg;
-		ArrayList <Double> totals = new ArrayList<Double>();
-		ArrayList<Activity> workouts = this.getActivities();
-		
-		for (int i = 0; i < workouts.size(); i++) {
-			temp = workouts.get(i).getCalories();
-			totals.add(temp);
-		}
-		
-		double sum = 0;
-		for (int j = 0; j < totals.size(); j++) {
-			sum += totals.get(j);
-		}
-		double numOfWorkouts = workouts.size();
-		avg = sum / numOfWorkouts;
-		return avg;
-	}
-	
-	public double avgAltGained() {
-		double temp;
-		double avg;
-		ArrayList <Double> totals = new ArrayList<Double>();
-		ArrayList<Activity> workouts = this.getActivities();
-		
-		for (int i = 0; i < workouts.size(); i++) {
-			temp = workouts.get(i).getAltGained();
-			totals.add(temp);
-		}
-		
-		double sum = 0;
-		for (int j = 0; j < totals.size(); j++) {
-			sum += totals.get(j);
-		}
-		double numOfWorkouts = workouts.size();
-		avg = sum / numOfWorkouts;
-		return avg;
-	}
-	
-	public double avgAltLost() {
-		double temp;
-		double avg;
-		ArrayList <Double> totals = new ArrayList<Double>();
-		ArrayList<Activity> workouts = this.getActivities();
-		
-		for (int i = 0; i < workouts.size(); i++) {
-			temp = workouts.get(i).getAltLost();
-			totals.add(temp);
-		}
-		
-		double sum = 0;
-		for (int j = 0; j < totals.size(); j++) {
-			sum += totals.get(j);
-		}
-		double numOfWorkouts = workouts.size();
-		avg = sum / numOfWorkouts;
-		return avg;
-	}
 }

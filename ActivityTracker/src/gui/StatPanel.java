@@ -7,6 +7,7 @@ import java.awt.Insets;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,7 +15,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
+import model.Activity;
 import model.Date;
+import model.Model;
 
 
 
@@ -24,12 +27,16 @@ public class StatPanel extends JPanel {
 	private TextField dateField2;
 	private JLabel dateHeader;
 	private JLabel dash;
-	private JLabel maxDistance;
-	private JLabel maxDuration;
-	private JLabel maxAltitude;
-	private JLabel maxDistanceL;
-	private JLabel maxDurationL;
-	private JLabel maxAltitudeL;
+	private JLabel avgDistance;
+	private JLabel avgDuration;
+	private JLabel avgAltGained;
+	private JLabel avgAltLost;
+	private JLabel avgCalories;
+	private JLabel avgDistanceL;
+	private JLabel avgDurationL;
+	private JLabel avgAltGainedL;
+	private JLabel avgAltLostL;
+	private JLabel avgCaloriesL;
 	private JButton filterBtn;
 	private FilterListener filterListener;
 	
@@ -40,14 +47,20 @@ public class StatPanel extends JPanel {
 		filterBtn = new JButton("Filter");
 		dateField1 = new TextField(10);
 		dateField2 = new TextField(10);
-		dateHeader = new JLabel("Enter Date Range");
+		dateHeader = new JLabel("Enter Date Range DD/MM/YEAR");
 		dash = new JLabel("-");
-		maxDistance = new JLabel("0");
-		maxDuration = new JLabel("0");
-		maxAltitude = new JLabel("0");
-		maxDistanceL = new JLabel("Max Distance: ");
-		maxDurationL = new JLabel("Max Duration: ");
-		maxAltitudeL = new JLabel("Max Altitude: ");
+		avgCalories = new JLabel("0");
+		avgDistance = new JLabel("0");
+		avgDuration = new JLabel("0");
+		avgAltGained = new JLabel("0");
+		avgAltLost = new JLabel("0");
+		avgCaloriesL = new JLabel("0");
+		avgDistanceL = new JLabel("Average Distance: ");
+		avgDurationL = new JLabel("Average Duration: ");
+		avgAltGainedL = new JLabel("Average Altitude Gained: ");
+		avgAltLostL = new JLabel("Average Altitude Lost: ");
+		avgCaloriesL = new JLabel("Average Calories Burned: ");
+		
 		
 		filterBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -86,107 +99,69 @@ public class StatPanel extends JPanel {
 	}
 	
 	public void layoutComponents() {
-		setLayout(new GridBagLayout());
-		GridBagConstraints gc = new GridBagConstraints();
+		int x = 10;
+		int y = 25;
+		int increment = 15;
+		int width = 200;
+		int height = 15;
+		int x2 = x + width;
+		setLayout(null);
+		avgDurationL.setBounds(x,y,width,height);
+		avgDuration.setBounds(x2,y,width,height);
+		y += increment;
+		avgDistanceL.setBounds(x,y,width,height);
+		avgDistance.setBounds(x2,y,width,height);
+		y += increment;
+		avgAltGainedL.setBounds(x,y,width,height);
+		avgAltGained.setBounds(x2,y,width,height);
+		y += increment;
+		avgAltLostL.setBounds(x,y,width,height);
+		avgAltLost.setBounds(x2,y,width,height);
+		y += increment;
+		avgCaloriesL.setBounds(x,y,width,height);
+		avgCalories.setBounds(x2,y,width,height);
+
+		add(avgDurationL);
+		add(avgDuration);
+		add(avgDistanceL);
+		add(avgDistance);
+		add(avgAltGainedL);
+		add(avgAltGained);
+		add(avgAltLostL);
+		add(avgAltLost);
+		add(avgCaloriesL);
+		add(avgCalories);
 		
-////////////////////FIRST ROW///////////////
-		gc.gridy = 0;
+		y += increment*5;
+		dateHeader.setBounds(x+x, y, 250, height);
+		y += increment;
+		dateField1.setBounds(x,y,110,20);
+		dateField2.setBounds(x+x+110,y,110,20);
+		dash.setBounds(122,y,x,height);
+		y+=increment*2;
+		filterBtn.setBounds(50, y, width/2, height*2);
 		
-		gc.weightx = 1;
-		gc.weighty = 0.1;
+		add(dateHeader);
+		add(dateField1);
+		add(dateField2);
+		add(dash);
+		add(filterBtn);
 		
-		gc.gridx = 0;
-		
-		gc.fill = GridBagConstraints.NONE;
-		gc.anchor = GridBagConstraints.LINE_END;
-		
-		add(dateHeader, gc);
-		
-		////////////////////NEXT ROW//////////////////////
-		gc.gridy++;
-		
-		gc.weightx = 0.1;
-		gc.weighty = 0.01;
-		
-		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.LINE_START;
-		gc.insets = new Insets(0,0,0,5);
-		add(dateField1, gc);
-		gc.gridx = 1;
-		gc.insets = new Insets(0,0,0,0);
-		add(dash,gc);
-		gc.gridx = 2;
-		
-		gc.anchor = GridBagConstraints.LINE_END;
-		gc.insets = new Insets(0,0,0,0);
-		add(dateField2,gc);
-		
-		
-		////////////////NEXT ROW////////////////////
-		gc.gridy++;
-		
-		gc.weightx = 2;
-		gc.weighty = 0.1;
-		
-		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.LINE_END;
-		gc.insets = new Insets(0,0,0,5);
-		add(maxDistanceL, gc);
-		gc.gridx = 1;
-		
-		gc.weightx = 1;
-		gc.anchor = GridBagConstraints.LINE_END;
-		gc.insets = new Insets(0,0,0,0);
-		add(maxDistance,gc);
-		
-		////////////////NEXT ROW////////////////////
-		gc.gridy++;
-		
-		gc.weightx = 2;
-		gc.weighty = 0.1;
-		
-		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.LINE_END;
-		gc.insets = new Insets(0,0,0,5);
-		add(maxDurationL, gc);
-		gc.gridx = 1;
-		
-		gc.weightx = 1;
-		gc.anchor = GridBagConstraints.LINE_END;
-		gc.insets = new Insets(0,0,0,0);
-		add(maxDuration,gc);
-		
-		////////////NEXT ROW///////////////////
-		gc.gridy++;
-		
-		gc.weightx = 2;
-		gc.weighty = 0.1;
-		
-		gc.gridx = 0;
-		gc.anchor = GridBagConstraints.LINE_END;
-		gc.insets = new Insets(0,0,0,5);
-		add(maxAltitudeL, gc);
-		gc.gridx = 1;
-		
-		gc.weightx = 1;
-		gc.anchor = GridBagConstraints.LINE_END;
-		gc.insets = new Insets(0,0,0,0);
-		add(maxAltitude,gc);
-		
-		/////////////NEXT ROW ////////////////
-		gc.gridy++;
-		
-		gc.weightx = 1;
-		gc.weighty = 2;
-		
-		gc.gridx = 1;
-		
-		gc.anchor = GridBagConstraints.FIRST_LINE_START;
-		gc.insets = new Insets(0,0,0,0);
-		add(filterBtn,gc);
 	}
 	public void setFilterListener(FilterListener filterListener) {
 		this.filterListener = filterListener;
 	}
-	
+	public void update(ArrayList<Activity> activities) {
+		avgDuration.setText(Double.toString((double)Math.round(Model.avgTotalDuration(activities)*100)/100));		avgDistance.setText(Double.toString((double)Math.round(Model.avgTotalDistance(activities)*100)/100));
+		avgAltGained.setText(Double.toString((double)Math.round(Model.avgAltGained(activities)*100)/100));
+		avgAltLost.setText(Double.toString((double)Math.round(Model.avgAltLost(activities)*100)/100));
+		avgCalories.setText(Double.toString((double)Math.round(Model.avgTotalCalories(activities)*100)/100));
+	}	
+	public void reset() {
+		avgDuration.setText("0");
+		avgDistance.setText("0");
+		avgAltGained.setText("0");
+		avgAltLost.setText("0");
+		avgCalories.setText("0");
+	}
 }

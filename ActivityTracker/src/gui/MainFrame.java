@@ -78,6 +78,7 @@ public class MainFrame extends JFrame {
 							formPanel.setVisible(false);
 							statPanel.setVisible(true);
 							tablePanel.setActivities(controller.getUserActivities());
+							statPanel.update(controller.getUserActivities());
 							tablePanel.updateActivity();
 						}
 						else {
@@ -107,6 +108,7 @@ public class MainFrame extends JFrame {
 				}
 				tablePanel.setActivities(filteredActivities);
 				tablePanel.updateActivity();
+				statPanel.update(filteredActivities);
 				
 				
 			}
@@ -163,6 +165,7 @@ public class MainFrame extends JFrame {
 						controller.importDevice(fileChooser.getSelectedFile());
 						tablePanel.updateActivity();
 						tablePanel.updateDataPoint();
+						statPanel.update(controller.getUserActivities());
 						
 					} catch (IOException e1) {
 						JOptionPane.showMessageDialog(MainFrame.this, "Could Not Load Data From File.",
@@ -179,6 +182,7 @@ public class MainFrame extends JFrame {
 					tablePanel.changeTable();
 				}
 				tablePanel.setActivities(defaultActivities);
+				statPanel.reset();
 				tablePanel.updateActivity();
 				formPanel.setVisible(true);
 				statPanel.setVisible(false);

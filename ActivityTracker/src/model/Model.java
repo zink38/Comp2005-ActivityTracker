@@ -153,8 +153,8 @@ public class Model {
 		return filteredActivities;
 	}
 	//sorting puts from greatest to least
-	public void sortByDistance() {
-		Collections.sort(userActivities, new Comparator<Activity>(){
+	public void sortByDistance(ArrayList<Activity> activities) {
+		Collections.sort(activities, new Comparator<Activity>(){
 	        
 	          public int compare(Activity n1, Activity n2){
 	              if( n1.getDistance() > n2.getDistance()){
@@ -168,8 +168,8 @@ public class Model {
 	            });
 			  
 		  }
-	public void sortByDuration() {
-		Collections.sort(userActivities, new Comparator<Activity>(){
+	public void sortByDuration(ArrayList<Activity> activities) {
+		Collections.sort(activities, new Comparator<Activity>(){
 	         @Override
 	          public int compare(Activity n1, Activity n2){
 	              if( n1.getDuration() > n2.getDuration()){
@@ -193,8 +193,8 @@ public class Model {
 		return filtActivity;
 	}
 	
-	public void sortByDate() {
-		Collections.sort(userActivities, new Comparator<Activity>(){
+	public void sortByDate(ArrayList<Activity> activities) {
+		Collections.sort(activities, new Comparator<Activity>(){
 	         @Override
 	          public int compare(Activity n1, Activity n2){
 	              if( n1.getDate().getValue() > n2.getDate().getValue()){
@@ -208,5 +208,104 @@ public class Model {
 	            });
 			  
 		  }
+	public static double avgTotalDuration(ArrayList<Activity> workouts) {
+		double temp;
+		double avg;
+		ArrayList <Double> totals = new ArrayList<Double>();
+		
+		
+		for (int i = 0; i < workouts.size(); i++) {
+			temp = workouts.get(i).getDuration();
+			totals.add(temp);
+		}
+		
+		double sum = 0;
+		for (int j = 0; j < totals.size(); j++) {
+			sum += totals.get(j);
+		}
+		double numOfWorkouts = workouts.size();
+		avg = sum / numOfWorkouts;
+		return avg;
+	}
+	
+	public static double avgTotalDistance(ArrayList<Activity> workouts) {
+		double temp;
+		double avg;
+		ArrayList <Double> totals = new ArrayList<Double>();
+		
+		
+		for (int i = 0; i < workouts.size(); i++) {
+			temp = workouts.get(i).getDistance();
+			totals.add(temp);
+		}
+		
+		double sum = 0;
+		for (int j = 0; j < totals.size(); j++) {
+			sum += totals.get(j);
+		}
+		double numOfWorkouts = workouts.size();
+		avg = sum / numOfWorkouts;
+		return avg;
+	}
+	
+	public static double avgTotalCalories(ArrayList<Activity> workouts) {
+		double temp;
+		double avg;
+		ArrayList <Double> totals = new ArrayList<Double>();
+
+		
+		for (int i = 0; i < workouts.size(); i++) {
+			temp = workouts.get(i).getCalories();
+			totals.add(temp);
+		}
+		
+		double sum = 0;
+		for (int j = 0; j < totals.size(); j++) {
+			sum += totals.get(j);
+		}
+		double numOfWorkouts = workouts.size();
+		avg = sum / numOfWorkouts;
+		return avg;
+	}
+	
+	public static double avgAltGained(ArrayList<Activity> workouts) {
+		double temp;
+		double avg;
+		ArrayList <Double> totals = new ArrayList<Double>();
+
+		
+		for (int i = 0; i < workouts.size(); i++) {
+			temp = workouts.get(i).getAltGained();
+			totals.add(temp);
+		}
+		
+		double sum = 0;
+		for (int j = 0; j < totals.size(); j++) {
+			sum += totals.get(j);
+		}
+		double numOfWorkouts = workouts.size();
+		avg = sum / numOfWorkouts;
+		return avg;
+	}
+	
+	public static double avgAltLost(ArrayList<Activity> workouts) {
+		double temp;
+		double avg;
+		ArrayList <Double> totals = new ArrayList<Double>();
+
+		
+		for (int i = 0; i < workouts.size(); i++) {
+			temp = workouts.get(i).getAltLost();
+			totals.add(temp);
+		}
+		
+		double sum = 0;
+		for (int j = 0; j < totals.size(); j++) {
+			sum += totals.get(j);
+		}
+		double numOfWorkouts = workouts.size();
+		avg = sum / numOfWorkouts;
+		return avg;
+	}
 
 }
