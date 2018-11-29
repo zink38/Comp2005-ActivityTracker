@@ -73,7 +73,7 @@ public class Activity {
 	public double getPace() {
 		double timeInMin = this.getDuration() / 60;
 		double distInKm = this.getDistance() / 1000;
-		pace = distInKm / timeInMin;
+		pace = timeInMin / distInKm;
 		return pace;
 	}
 	public void setPace(double distance, double duration) {

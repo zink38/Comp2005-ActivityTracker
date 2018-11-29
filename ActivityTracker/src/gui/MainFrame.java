@@ -114,15 +114,15 @@ public class MainFrame extends JFrame {
 			}
 		});
 		
-		setMinimumSize(new Dimension(800,600));
-		setMaximumSize(new Dimension(800,600));
-		setSize(700, 600);
+		setMinimumSize(new Dimension(1150,600));
+		setMaximumSize(new Dimension(1150,600));
+		setSize(1150, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setVisible(true);
 		
 		statPanel.setBounds(0,0,300,600);
 		formPanel.setBounds(0,0,300,600);
-		tablePanel.setBounds(300,0,500,600);
+		tablePanel.setBounds(300,0,850,600);
 		
 		add(statPanel);
 		add(formPanel);

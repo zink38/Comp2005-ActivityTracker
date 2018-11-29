@@ -37,6 +37,21 @@ public class StatPanel extends JPanel {
 	private JLabel avgAltGainedL;
 	private JLabel avgAltLostL;
 	private JLabel avgCaloriesL;
+	
+	private JLabel maxDistance;
+	private JLabel maxDuration;
+	private JLabel maxAltGained;
+	private JLabel maxAltLost;
+	private JLabel maxCalories;
+	private JLabel maxDistanceL;
+	private JLabel maxDurationL;
+	private JLabel maxAltGainedL;
+	private JLabel maxAltLostL;
+	private JLabel maxCaloriesL;
+	
+	private JLabel maxPace;
+	private JLabel maxPaceL;
+	
 	private JButton filterBtn;
 	private FilterListener filterListener;
 	
@@ -60,6 +75,21 @@ public class StatPanel extends JPanel {
 		avgAltGainedL = new JLabel("Average Altitude Gained: ");
 		avgAltLostL = new JLabel("Average Altitude Lost: ");
 		avgCaloriesL = new JLabel("Average Calories Burned: ");
+		
+		maxPaceL = new JLabel("Max Pace: ");
+		maxPace = new JLabel("0");
+		
+		maxCalories = new JLabel("0");
+		maxDistance = new JLabel("0");
+		maxDuration = new JLabel("0");
+		maxAltGained = new JLabel("0");
+		maxAltLost = new JLabel("0");
+		maxCaloriesL = new JLabel("0");
+		maxDistanceL = new JLabel("Max Distance: ");
+		maxDurationL = new JLabel("Max Duration: ");
+		maxAltGainedL = new JLabel("Max Altitude Gained: ");
+		maxAltLostL = new JLabel("Max Altitude Lost: ");
+		maxCaloriesL = new JLabel("Max Calories Burned: ");
 		
 		
 		filterBtn.addActionListener(new ActionListener() {
@@ -120,6 +150,25 @@ public class StatPanel extends JPanel {
 		y += increment;
 		avgCaloriesL.setBounds(x,y,width,height);
 		avgCalories.setBounds(x2,y,width,height);
+		y += increment;
+		maxDurationL.setBounds(x,y,width,height);
+		maxDuration.setBounds(x2,y,width,height);
+		y += increment;
+		maxDistanceL.setBounds(x,y,width,height);
+		maxDistance.setBounds(x2,y,width,height);
+		y += increment;
+		maxAltGainedL.setBounds(x,y,width,height);
+		maxAltGained.setBounds(x2,y,width,height);
+		y += increment;
+		maxAltLostL.setBounds(x,y,width,height);
+		maxAltLost.setBounds(x2,y,width,height);
+		y += increment;
+		maxCaloriesL.setBounds(x,y,width,height);
+		maxCalories.setBounds(x2,y,width,height);
+		y += increment;
+		maxPaceL.setBounds(x,y,width,height);
+		maxPace.setBounds(x2,y,width,height);
+		y += increment;
 
 		add(avgDurationL);
 		add(avgDuration);
@@ -131,6 +180,18 @@ public class StatPanel extends JPanel {
 		add(avgAltLost);
 		add(avgCaloriesL);
 		add(avgCalories);
+		add(maxDurationL);
+		add(maxDuration);
+		add(maxDistanceL);
+		add(maxDistance);
+		add(maxAltGainedL);
+		add(maxAltGained);
+		add(maxAltLostL);
+		add(maxAltLost);
+		add(maxCaloriesL);
+		add(maxCalories);
+		add(maxPaceL);
+		add(maxPace);
 		
 		y += increment*5;
 		dateHeader.setBounds(x+x, y, 250, height);
@@ -152,10 +213,18 @@ public class StatPanel extends JPanel {
 		this.filterListener = filterListener;
 	}
 	public void update(ArrayList<Activity> activities) {
-		avgDuration.setText(Double.toString((double)Math.round(Model.avgTotalDuration(activities)*100)/100));		avgDistance.setText(Double.toString((double)Math.round(Model.avgTotalDistance(activities)*100)/100));
-		avgAltGained.setText(Double.toString((double)Math.round(Model.avgAltGained(activities)*100)/100));
-		avgAltLost.setText(Double.toString((double)Math.round(Model.avgAltLost(activities)*100)/100));
-		avgCalories.setText(Double.toString((double)Math.round(Model.avgTotalCalories(activities)*100)/100));
+		avgDuration.setText(Double.toString((double)Math.round(Model.avgTotalDuration(activities)*100)/100)+"s");		
+		avgDistance.setText(Double.toString((double)Math.round(Model.avgTotalDistance(activities)*100)/100)+"m");
+		avgAltGained.setText(Double.toString((double)Math.round(Model.avgAltGained(activities)*100)/100)+"m");
+		avgAltLost.setText(Double.toString((double)Math.round(Model.avgAltLost(activities)*100)/100)+"m");
+		avgCalories.setText(Double.toString((double)Math.round(Model.avgTotalCalories(activities)*100)/100)+"cal");
+		
+		maxDuration.setText(Double.toString((double)Math.round(Model.maxDuration(activities)*100)/100)+"s");		
+		maxDistance.setText(Double.toString((double)Math.round(Model.maxDistance(activities)*100)/100)+"m");
+		maxAltGained.setText(Double.toString((double)Math.round(Model.maxAltGained(activities)*100)/100)+"m");
+		maxAltLost.setText(Double.toString((double)Math.round(Model.maxAltLost(activities)*100)/100)+"m");
+		maxCalories.setText(Double.toString((double)Math.round(Model.maxCalories(activities)*100)/100)+"cal");
+		maxPace.setText(Double.toString((double)Math.round(Model.maxPace(activities)*100)/100)+"min/km");
 	}	
 	public void reset() {
 		avgDuration.setText("0");
@@ -163,5 +232,11 @@ public class StatPanel extends JPanel {
 		avgAltGained.setText("0");
 		avgAltLost.setText("0");
 		avgCalories.setText("0");
+		maxDuration.setText("0");
+		maxDistance.setText("0");
+		maxAltGained.setText("0");
+		maxAltLost.setText("0");
+		maxCalories.setText("0");
+		maxPace.setText("0");
 	}
 }

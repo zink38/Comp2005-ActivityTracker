@@ -85,8 +85,8 @@ public class TablePanel extends JPanel {
 		aTS = new JScrollPane(activityTable);
 		dTS = new JScrollPane(dataPointTable);
 		dTS.setVisible(false);
-		aTS.setBounds(0,0,500,600);
-		dTS.setBounds(0,0,500,600);
+		aTS.setBounds(0,0,850,600);
+		dTS.setBounds(0,0,850,600);
 		add(dTS);
 		add(aTS);
 		

@@ -307,5 +307,60 @@ public class Model {
 		avg = sum / numOfWorkouts;
 		return avg;
 	}
+	
+	public static double maxDuration(ArrayList<Activity> activities) {
+		double result = 0;
+		for(Activity activity: activities) {
+			if(activity.getDuration()>result) {
+				result = activity.getDuration();
+			}
+		}
+		return result;
+	}
+	public static double maxDistance(ArrayList<Activity> activities) {
+		double result = 0;
+		for(Activity activity: activities) {
+			if(activity.getDistance()>result) {
+				result = activity.getDistance();
+			}
+		}
+		return result;	}
+	public static double maxAltGained(ArrayList<Activity> activities) {
+		double result = 0;
+		for(Activity activity: activities) {
+			if(activity.getAltGained()>result) {
+				result = activity.getAltGained();
+			}
+		}
+		return result;
+	}
+	public static double maxAltLost(ArrayList<Activity> activities) {
+		double result = 0;
+		for(Activity activity: activities) {
+			if(activity.getAltLost()<result) {
+				result = activity.getAltLost();
+			}
+		}
+		return result;
+	}
+	public static double maxCalories(ArrayList<Activity> activities) {
+		double result = 0;
+		for(Activity activity: activities) {
+			if(activity.getCalories()>result) {
+				result = activity.getCalories();
+			}
+		}
+		return result;
+	}
+	public static double maxPace(ArrayList<Activity> activities) {
+		double result = 0;
+		for(Activity activity: activities) {
+			if(activity.getPace()>result) {
+				result = activity.getPace();
+			}
+		}
+		return result;
+	}
+	
 
 }
